@@ -2,7 +2,7 @@ package ru.tinkoff.fintech
 
 import java.time.LocalDate
 
-fun typeCasting(obj : Any?) : String? {
+fun typeCast(obj : Any?) : String? {
     return when (obj) {
         null -> null
         is String -> "Я получил тип String = $obj, ее длина равна ${obj.length}"
