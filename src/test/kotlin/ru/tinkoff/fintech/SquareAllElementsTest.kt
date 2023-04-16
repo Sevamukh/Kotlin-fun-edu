@@ -1,7 +1,7 @@
 package ru.tinkoff.fintech
 
-import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.Assertions.*
+import kotlin.test.Test
+import kotlin.test.assertEquals
 
 
 class SquareAllElementsTest {
@@ -10,6 +10,6 @@ class SquareAllElementsTest {
     fun squareAllElementsReturnsValidResult() {
         val actualArrayList = arrayListOf(-1, 0, 2)
         actualArrayList.squareAllElements()
-        assertEquals(arrayListOf(1, 0, 4), actualArrayList, "bfgb")
+        assertEquals(arrayListOf(1, 0, 4), actualArrayList, "Сообщение")
     }
 }

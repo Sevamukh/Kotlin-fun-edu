@@ -1,5 +1,6 @@
 plugins {
     kotlin("jvm") version "1.8.0"
+    application
 }
 
 group = "ru.tinkoff.fintech"
@@ -19,4 +20,8 @@ tasks.test {
 
 kotlin {
     jvmToolchain(11)
+}
+
+application {
+    mainClass.set("MainKt")
 }
