@@ -14,14 +14,14 @@ class NumberToWords {
         5 to "пятьсот", 6 to "шестьсот", 7 to "семьсот", 8 to "восемьсот", 9 to "девятьсот")
 
     fun convertNumberToWords(num: Int): String {
-        val words = ArrayList<String>()
         if (num < 1 || num > 1000) throw IllegalArgumentException("Данное число выходит за границы разрешенного диапазона")
-        return if (num == 1000) thousand
+        val result = if (num == 1000) thousand
         else {
+            val words = ArrayList<String>()
             val nHundreds = num / 100
             if (nHundreds > 0) words.add(hundreds.getValue(nHundreds))
             when (val nModulo100 = num % 100) {
-                0 -> Unit
+                0 -> {}
                 in 1..9 -> words.add(units.getValue(nModulo100))
                 in 10..19 -> words.add(teens.getValue(nModulo100))
                 else -> {
@@ -31,6 +31,8 @@ class NumberToWords {
             }
             words.joinToString(separator = " ")
         }
+        println(result)
+        return result
     }
 }
 
