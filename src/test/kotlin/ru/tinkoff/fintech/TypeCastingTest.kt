@@ -9,11 +9,28 @@ import org.junit.jupiter.params.provider.MethodSource
 import java.io.ByteArrayOutputStream
 import java.io.PrintStream
 import java.time.LocalDate
-import java.util.logging.Handler
 import java.util.stream.Stream
 
 class TypeCastingTest {
     private val output = ByteArrayOutputStream()
+
+    companion object TestArgumentsProvider {
+        @JvmStatic
+        fun provideArgumentsForTypeCastDouble(): Stream<Arguments> = Stream.of(
+            Arguments.of(1.0, "1.0", "1"),
+            Arguments.of(0.001, "0.001", "0"),
+            Arguments.of(1.005, "1.005", "1.01"),
+            Arguments.of(-1.005, "-1.005", "-1.01"),
+        )
+
+        @JvmStatic
+        fun provideArgumentsForTypeCastLocalDate(): Stream<Arguments> = Stream.of(
+            Arguments.of(LocalDate.of(1990,1,1),
+                "Я получил LocalDate = 1990-01-01, она меньше даты основания Tinkoff"),
+            Arguments.of(LocalDate.of(2023,4,21),
+                "Я получил LocalDate = 2023-04-21, она не меньше даты основания Tinkoff"),
+        )
+    }
 
     @BeforeEach
     fun setUpStreams() {
@@ -27,7 +44,7 @@ class TypeCastingTest {
             "Неверный вывод для целого числа")
     }
 
-    @ParameterizedTest(name = "Used Double = {0}, expected full and short String: {1} {2}")
+    @ParameterizedTest(name = "typeCast should print valid result for Double = {0}")
     @MethodSource("provideArgumentsForTypeCastDouble")
     fun typeCast_Double_ShouldPrintValidResult(num: Double, numStr: String, shortNumStr: String) {
         typeCast(num)
@@ -44,7 +61,7 @@ class TypeCastingTest {
             "Неверный вывод для строки")
     }
 
-    @ParameterizedTest(name = "Used LocalDate = {0}")
+    @ParameterizedTest(name = "typeCast should print valid result for LocalDate = {0}")
     @MethodSource("provideArgumentsForTypeCastLocalDate")
     fun typeCast_LocalDate_ShouldPrintValidResult(date: LocalDate, expectedStr: String) {
         typeCast(date)
@@ -60,26 +77,8 @@ class TypeCastingTest {
 
     @Test
     fun typeCast_UnknownType_ShouldPrintValidResult() {
-        typeCast(Handler::class)
+        typeCast(Int::class)
         assertEquals("Мне этот тип неизвестен", output.toString().trim(),
             "Неверный вывод для нестандартного типа")
-    }
-
-    companion object {
-        @JvmStatic
-        fun provideArgumentsForTypeCastDouble(): Stream<Arguments> = Stream.of(
-            Arguments.of(1.0, "1.0", "1"),
-            Arguments.of(0.001, "0.001", "0"),
-            Arguments.of(1.005, "1.005", "1.01"),
-            Arguments.of(-1.005, "-1.005", "-1.01"),
-        )
-
-        @JvmStatic
-        fun provideArgumentsForTypeCastLocalDate(): Stream<Arguments> = Stream.of(
-            Arguments.of(LocalDate.of(1990,1,1),
-                "Я получил LocalDate = 1990-01-01, она меньше даты основания Tinkoff"),
-            Arguments.of(LocalDate.of(2023,4,21),
-                "Я получил LocalDate = 2023-04-21, она не меньше даты основания Tinkoff"),
-        )
     }
 }

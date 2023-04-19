@@ -3,6 +3,9 @@ package ru.tinkoff.fintech
 import java.time.LocalDate
 import java.util.*
 
+/**
+ * Метод из задачи 2
+ */
 fun typeCast(obj: Any?): String {
     val result = when (obj) {
         null -> "Я получил null"

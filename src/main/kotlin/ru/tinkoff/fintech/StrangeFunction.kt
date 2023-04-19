@@ -1,8 +1,10 @@
 package ru.tinkoff.fintech
 
-import java.util.*
-import kotlin.math.roundToInt
+import java.util.Locale.ENGLISH
 
+/**
+ * Метод из задачи 3
+ */
 fun strangeFunction(list: List<Double?>): Double {
     val result = list.asSequence()
         .filterNotNull()
@@ -11,6 +13,6 @@ fun strangeFunction(list: List<Double?>): Double {
         .sortedDescending()
         .take(10)
         .sum()
-    println(String.format(Locale.ENGLISH, "%.2f", result).trimEnd('0').trimEnd('.'))
+    println(String.format(ENGLISH, "%.2f", result).trimEnd('0').trimEnd('.'))
     return result
 }

@@ -2,7 +2,7 @@ package ru.tinkoff.fintech
 
 class NumberToWords {
 
-    private val thousand = "Тысяча"
+    private val thousand = "тысяча"
     private val units = mapOf(1 to "один", 2 to "два", 3 to "три", 4 to "четыре",
         5 to "пять", 6 to "шесть", 7 to "семь", 8 to "восемь", 9 to "девять")
     private val teens = mapOf(10 to "десять", 11 to "одиннадцать", 12 to "двенадцать", 13 to "тринадцать", 14 to "четырнадцать",
@@ -12,6 +12,9 @@ class NumberToWords {
     private val hundreds = mapOf(1 to "сто", 2 to "двести", 3 to "триста", 4 to "четыреста",
         5 to "пятьсот", 6 to "шестьсот", 7 to "семьсот", 8 to "восемьсот", 9 to "девятьсот")
 
+    /**
+     * Метод из задачи 4
+     */
     fun convertNumberToWords(num: Int): String {
         if (num < 1 || num > 1000) throw IllegalArgumentException("Данное число выходит за границы разрешенного диапазона")
         val result = if (num == 1000) thousand
