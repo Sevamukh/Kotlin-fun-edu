@@ -1,6 +1,5 @@
 package ru.tinkoff.fintech
 
-
 class NumberToWords {
 
     private val thousand = "Тысяча"
