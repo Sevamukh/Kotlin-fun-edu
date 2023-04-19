@@ -9,6 +9,7 @@ import org.junit.jupiter.params.provider.MethodSource
 import java.io.ByteArrayOutputStream
 import java.io.PrintStream
 import java.time.LocalDate
+import java.util.logging.Handler
 import java.util.stream.Stream
 
 class TypeCastingTest {
@@ -20,7 +21,7 @@ class TypeCastingTest {
     }
 
     @Test
-    fun typeCast_Int_PrintValidResult() {
+    fun typeCast_Int_ShouldPrintValidResult() {
         typeCast(2)
         assertEquals("Я получил Int = 2, его квадрат равен 4", output.toString().trim(),
             "Неверный вывод для целого числа")
@@ -28,7 +29,7 @@ class TypeCastingTest {
 
     @ParameterizedTest(name = "Used Double = {0}, expected full and short String: {1} {2}")
     @MethodSource("provideArgumentsForTypeCastDouble")
-    fun typeCast_Double_PrintValidResult(num: Double, numStr: String, shortNumStr: String) {
+    fun typeCast_Double_ShouldPrintValidResult(num: Double, numStr: String, shortNumStr: String) {
         typeCast(num)
         assertEquals("Я получил Double = $numStr, это число округляется до $shortNumStr",
             output.toString().trim(),
@@ -36,7 +37,7 @@ class TypeCastingTest {
     }
 
     @Test
-    fun typeCast_String_PrintValidResult() {
+    fun typeCast_String_ShouldPrintValidResult() {
         typeCast("Привет, Андрей, ну где ты был, ну обними меня скорей!")
         assertEquals("Я получил тип String = 'Привет, Андрей, ну где ты был, ну обними меня скорей!', ее длина равна 53",
             output.toString().trim(),
@@ -45,16 +46,23 @@ class TypeCastingTest {
 
     @ParameterizedTest(name = "Used LocalDate = {0}")
     @MethodSource("provideArgumentsForTypeCastLocalDate")
-    fun typeCast_LocalDate_PrintValidResult(date: LocalDate, expectedStr: String) {
+    fun typeCast_LocalDate_ShouldPrintValidResult(date: LocalDate, expectedStr: String) {
         typeCast(date)
         assertEquals(expectedStr, output.toString().trim(), "Неверный вывод для даты")
     }
 
     @Test
-    fun typeCast_Null_PrintValidResult() {
+    fun typeCast_Null_ShouldPrintValidResult() {
         typeCast(null)
         assertEquals("Я получил null", output.toString().trim(),
             "Неверный вывод для null")
+    }
+
+    @Test
+    fun typeCast_UnknownType_ShouldPrintValidResult() {
+        typeCast(Handler::class)
+        assertEquals("Мне этот тип неизвестен", output.toString().trim(),
+            "Неверный вывод для нестандартного типа")
     }
 
     companion object {

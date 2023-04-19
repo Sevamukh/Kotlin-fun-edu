@@ -1,5 +1,6 @@
 package ru.tinkoff.fintech
 
+import java.util.*
 import kotlin.math.roundToInt
 
 fun strangeFunction(list: List<Double?>): Double {
@@ -10,6 +11,6 @@ fun strangeFunction(list: List<Double?>): Double {
         .sortedDescending()
         .take(10)
         .sum()
-    println((result * 100).roundToInt() / 100.0)
+    println(String.format(Locale.ENGLISH, "%.2f", result).trimEnd('0').trimEnd('.'))
     return result
 }

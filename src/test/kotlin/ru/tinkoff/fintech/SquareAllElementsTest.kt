@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test
 class SquareAllElementsTest {
 
     @Test
-    fun squareAllElementsReturnsValidResult() {
+    fun squareAllElementsShouldReturnValidResult() {
         val actualList = arrayListOf(-1, 0, 2)
         actualList.squareAllElements()
         assertEquals(arrayListOf(1, 0, 4), actualList,
