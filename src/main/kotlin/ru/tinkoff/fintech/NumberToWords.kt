@@ -1,7 +1,6 @@
 package ru.tinkoff.fintech
 
 class NumberToWords {
-
     private val thousand = "тысяча"
     private val units = mapOf(1 to "один", 2 to "два", 3 to "три", 4 to "четыре",
         5 to "пять", 6 to "шесть", 7 to "семь", 8 to "восемь", 9 to "девять")
